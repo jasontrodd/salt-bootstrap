@@ -3395,6 +3395,8 @@ install_centos_stable_deps() {
     if [ "$DISTRO_MAJOR_VERSION" -eq 5 ]; then
         # Install curl which is not included in @core CentOS 5 installation
         __check_command_exists curl || yum -y install "curl.${CPU_ARCH_L}" || return 1
+        # Install/update python-hashlib to ensure CentOS 5 can work with COPR repo SHA256 checksums 
+        yum -y install python-hashlib || return 1
     fi
 
     if [ $_DISABLE_REPOS -eq $BS_FALSE ]; then
